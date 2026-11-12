@@ -1,0 +1,56 @@
+server:
+  port: ${PORT:8080}
+  error:
+    include-message: always
+    include-binding-errors: always
+
+spring:
+  application:
+    name: skillswap-backend
+  data:
+    mongodb:
+      uri: ${MONGODB_URI:mongodb://localhost:27017/skillswap}
+      auto-index-creation: true
+  cache:
+    type: simple
+  mail:
+    host: ${MAIL_HOST:localhost}
+    port: ${MAIL_PORT:1025}
+
+app:
+  jwt:
+    secret: ${JWT_SECRET:404E635266556A586E3272357538782F413F4428472B4B6250645367566B5970}
+    access-token-expiration-ms: 900000 # 15 minutes
+    refresh-token-expiration-ms: 604800000 # 7 days
+    cookie-domain: ${COOKIE_DOMAIN:}
+    cookie-secure: ${COOKIE_SECURE:false}
+    cookie-same-site: ${COOKIE_SAME_SITE:Lax}
+  cors:
+    allowed-origins: ${CORS_ALLOWED_ORIGINS:http://localhost:3000,http://localhost:8080,https://skillswap.vercel.app}
+  rate-limit:
+    auth-capacity: 10
+    auth-refill-tokens: 10
+    auth-refill-period-seconds: 60
+    api-capacity: 60
+    api-refill-tokens: 60
+    api-refill-period-seconds: 60
+
+springdoc:
+  api-docs:
+    path: /v3/api-docs
+  swagger-ui:
+    path: /swagger-ui/index.html
+    operations-sorter: method
+    tags-sorter: alpha
+
+management:
+  health:
+    mail:
+      enabled: false
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics
+  endpoint:
+    health:
+      show-details: always

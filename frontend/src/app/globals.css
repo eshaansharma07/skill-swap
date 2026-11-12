@@ -1,0 +1,83 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --canvas: #FBFBFD;
+  --surface: #FFFFFF;
+  --foreground: #1D1D1F;
+  --secondary: #6E6E73;
+  --border: rgba(0, 0, 0, 0.08);
+  --accent: #0071E3;
+}
+
+.dark {
+  --canvas: #000000;
+  --surface: #1C1C1E;
+  --foreground: #F5F5F7;
+  --secondary: #86868B;
+  --border: rgba(255, 255, 255, 0.12);
+  --accent: #2997FF;
+}
+
+body {
+  background-color: var(--canvas);
+  color: var(--foreground);
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Inter", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Custom hairline borders */
+.hairline-border {
+  border-width: 0.5px;
+  border-color: var(--border);
+}
+
+/* Frosted glass top nav */
+.nav-blur {
+  background: rgba(251, 251, 253, 0.82);
+  backdrop-filter: saturate(180%) blur(20px);
+  -webkit-backdrop-filter: saturate(180%) blur(20px);
+}
+
+.dark .nav-blur {
+  background: rgba(0, 0, 0, 0.82);
+  backdrop-filter: saturate(180%) blur(20px);
+  -webkit-backdrop-filter: saturate(180%) blur(20px);
+}
+
+/* Sheet blur */
+.sheet-blur {
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: saturate(180%) blur(25px);
+  -webkit-backdrop-filter: saturate(180%) blur(25px);
+}
+
+.dark .sheet-blur {
+  background: rgba(28, 28, 30, 0.92);
+  backdrop-filter: saturate(180%) blur(25px);
+  -webkit-backdrop-filter: saturate(180%) blur(25px);
+}
+
+/* Smooth focus rings */
+*:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(0, 113, 227, 0.35);
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(142, 142, 147, 0.3);
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(142, 142, 147, 0.5);
+}
