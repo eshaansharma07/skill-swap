@@ -1,0 +1,39 @@
+services:
+  - type: web
+    name: skillswap-backend
+    runtime: docker
+    dockerfilePath: backend/Dockerfile
+    dockerContext: backend
+    plan: free
+    healthCheckPath: /actuator/health
+    envVars:
+      - key: PORT
+        value: 8080
+      - key: SPRING_DATA_MONGODB_URI
+        sync: false
+      - key: APP_JWT_SECRET
+        generateValue: true
+      - key: APP_COOKIE_SECURE
+        value: "true"
+      - key: APP_CORS_ALLOWED_ORIGINS
+        value: "https://*.onrender.com,http://localhost:3000"
+
+  - type: web
+    name: skillswap-frontend
+    runtime: docker
+    dockerfilePath: frontend/Dockerfile
+    dockerContext: frontend
+    plan: free
+    envVars:
+      - key: PORT
+        value: 3000
+      - key: NEXT_PUBLIC_BACKEND_URL
+        fromService:
+          type: web
+          name: skillswap-backend
+          property: host
+      - key: NEXT_PUBLIC_WS_URL
+        fromService:
+          type: web
+          name: skillswap-backend
+          property: host
