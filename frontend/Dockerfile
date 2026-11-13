@@ -3,6 +3,11 @@ FROM node:20-alpine AS builder
 WORKDIR /app
 ENV NEXT_TELEMETRY_DISABLED=1
 
+ARG NEXT_PUBLIC_BACKEND_URL=https://skillswap-backend-production-8e9aa338.up.railway.app
+ARG NEXT_PUBLIC_WS_URL=https://skillswap-backend-production-8e9aa338.up.railway.app/ws
+ENV NEXT_PUBLIC_BACKEND_URL=$NEXT_PUBLIC_BACKEND_URL
+ENV NEXT_PUBLIC_WS_URL=$NEXT_PUBLIC_WS_URL
+
 COPY package*.json ./
 RUN npm ci
 
@@ -15,7 +20,9 @@ FROM node:20-alpine AS runner
 WORKDIR /app
 ENV NODE_ENV=production \
     NEXT_TELEMETRY_DISABLED=1 \
-    PORT=3000
+    PORT=3000 \
+    NEXT_PUBLIC_BACKEND_URL=https://skillswap-backend-production-8e9aa338.up.railway.app \
+    NEXT_PUBLIC_WS_URL=https://skillswap-backend-production-8e9aa338.up.railway.app/ws
 
 RUN addgroup --system --gid 1001 nodejs && \
     adduser --system --uid 1001 nextjs

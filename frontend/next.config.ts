@@ -1,6 +1,9 @@
 import type { NextConfig } from "next";
 
-const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL || "http://localhost:8080";
+const backendUrl =
+  process.env.BACKEND_INTERNAL_URL ||
+  process.env.NEXT_PUBLIC_BACKEND_URL ||
+  "https://skillswap-backend-production-8e9aa338.up.railway.app";
 
 const securityHeaders = [
   { key: "X-DNS-Prefetch-Control", value: "on" },
